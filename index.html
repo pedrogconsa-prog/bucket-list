@@ -4,9 +4,7 @@
 <title>Bucket List</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#efefed;--fg:#0e0e0e;--mute:#8b8b87;--mid:#4a4a47;--dot:#c9c9c5;--line:#d3d3cf;--panel:#f7f7f5;--red:#ff2a1f;--green:#1fb85a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0a0a;--fg:#f1f1ef;--mute:#6f6f6b;--mid:#c9c9c5;--dot:#2c2c2a;--line:#232321;--panel:#101010}}
-:root[data-theme="dark"]{--bg:#0a0a0a;--fg:#f1f1ef;--mute:#6f6f6b;--mid:#c9c9c5;--dot:#2c2c2a;--line:#232321;--panel:#101010}
+:root{--bg:#f1ead8;--fg:#355E3B;--mute:#6f8c74;--mid:#8cbc95;--hot:#0d1f11;--dot:#355E3B;--line:#355E3B;--panel:#f7f1e1;--red:#ff2a1f;--green:#2b6cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{height:100%;margin:0;overflow:hidden}
 body{background:var(--bg);color:var(--fg);font:13px/1.5 "Space Mono",ui-monospace,Menlo,monospace}
 canvas{touch-action:none;position:fixed;inset:0;width:100%;height:100%;display:block}
@@ -34,7 +32,7 @@ input.t{font-size:18px;font-weight:700}
 .chk{display:flex;align-items:center;gap:10px;margin-top:20px;cursor:pointer;color:var(--fg);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .chk input{width:18px;height:18px;accent-color:var(--fg);margin:0}
 .ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
-.ph-grid div{position:relative;aspect-ratio:1;background:var(--line)}
+.ph-grid div{position:relative;aspect-ratio:1;background:rgba(53,94,59,.15)}
 .ph-grid img{width:100%;height:100%;object-fit:cover;display:block}
 .ph-grid button{position:absolute;top:2px;right:2px;background:var(--bg);color:var(--fg);border:0;width:20px;height:20px;cursor:pointer}
 .add{aspect-ratio:1;border:1px dashed var(--mute);display:grid;place-content:center;color:var(--mute);cursor:pointer;font-size:22px}
@@ -63,7 +61,7 @@ const $=id=>document.getElementById(id),cv=$('c'),ctx=cv.getContext('2d'),tip=$(
 let items=new Map(),byDot={},hov=null,sel=null,draft={},cell=10,ox=0,oy=0,W=0,H=0,Q=1,C={},db=null,assets=null;
 let v={k:1,x:0,y:0},tv={k:1,x:0,y:0};
 const el=(t,p={},...k)=>{const e=document.createElement(t);for(const x in p){if(x==='class')e.className=p[x];else if(x.startsWith('on')||x==='value'||x==='checked')e[x]=p[x];else e.setAttribute(x,p[x])}k.flat().forEach(c=>e.append(c));return e};
-function colors(){const s=getComputedStyle(document.documentElement),g=n=>s.getPropertyValue(n).trim();C={dot:g('--dot'),mid:g('--mid'),fg:g('--fg'),red:g('--red'),green:g('--green')}}
+function colors(){const s=getComputedStyle(document.documentElement),g=n=>s.getPropertyValue(n).trim();C={dot:g('--dot'),mid:g('--mid'),fg:g('--hot'),red:g('--red'),green:g('--green')}}
 function layout(){W=innerWidth;H=innerHeight;Q=devicePixelRatio||1;cv.width=W*Q;cv.height=H*Q;
 cell=Math.min(W/(COLS+1),(H-120)/(ROWS*.9));ox=(W-COLS*cell)/2;oy=(H-ROWS*cell*.9)/2+16;
 dots.forEach(d=>{d.x=ox+(d.c+(d.r&1?.5:0)+.5)*cell;d.y=oy+d.r*cell*.9});clampT();Object.assign(v,tv)}
